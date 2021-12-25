@@ -1,3 +1,7 @@
+# Asset Protector Project
+(Avalanche Protector / Asset Protector both fine)
+We seek to create an application to help monitor leverage on the avalanche ecosystem.
+
 # Advanced Sample Hardhat Project
 
 This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
