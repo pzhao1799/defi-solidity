@@ -11,7 +11,7 @@ import "../../auth/AdminAuth.sol";
 import "./helpers/WrapperHelper.sol";
 
 /// @title DFS exchange wrapper for TraderJoe
-contract TraderJoeWrapper is DSMath, IExchangeV3, AdminAuth, WrapperHelper {
+contract TraderJoeWrapper is APMath, IExchangeV3, AdminAuth, WrapperHelper {
 
     using TokenUtils for address;
 

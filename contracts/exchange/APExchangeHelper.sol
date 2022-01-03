@@ -19,7 +19,7 @@ contract APExchangeHelper {
         address _destAddr,
         address payable _to
     ) internal {
-        // clean out any eth leftover
+        // clean out any avax leftover
         TokenUtils.AVAX_BURN_ADDRESS.withdrawTokens(_to, type(uint256).max);
 
         _srcAddr.withdrawTokens(_to, type(uint256).max);
