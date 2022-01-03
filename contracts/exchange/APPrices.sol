@@ -1,17 +1,15 @@
-pragma solidity ^0.6.0;
+// SPDX-License-Identifier: MIT
+
+pragma solidity =0.7.6;
 pragma experimental ABIEncoderV2;
 
 import "../AP/APMath.sol";
-import "../interfaces/TokenInterface.sol";
-import "../interfaces/ExchangeInterfaceV3.sol";
 import "../utils/SafeERC20.sol";
+import "./helpers/ExchangeHelper.sol";
 
-contract APPrices is APMath {
-
-    address public constant KYBER_ETH_ADDRESS = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
+contract APPrices is APMath, ExchangeHelper {
 
     enum ActionType { SELL, BUY }
-
 
     /// @notice Returns the best estimated price from 2 exchanges
     /// @param _amount Amount of source tokens you want to exchange
@@ -101,9 +99,9 @@ contract APPrices is APMath {
     }
 
     function getDecimals(address _token) internal view returns (uint256) {
-        if (_token == KYBER_ETH_ADDRESS) return 18;
+        if (_token == ETH_ADDRESS) return 18;
 
-        return ERC20(_token).decimals();
+        return IERC20(_token).decimals();
     }
 
     function sliceUint(bytes memory bs, uint256 start) internal pure returns (uint256) {

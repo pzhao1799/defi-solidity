@@ -1,11 +1,14 @@
-pragma solidity ^0.6.0;
+// SPDX-License-Identifier: MIT
+
+pragma solidity =0.7.6;
 
 import "../DS/DSGuard.sol";
 import "../DS/DSAuth.sol";
 
-contract ProxyPermission {
-    // TODO: set factory address
-    address public constant FACTORY_ADDRESS = "";
+import "./helpers/AuthHelper.sol";
+
+/// @title ProxyPermission Proxy contract which works with DSProxy to give execute permission
+contract ProxyPermission is AuthHelper {
 
     /// @notice Called in the context of DSProxy to authorize an address
     /// @param _contractAddr Address which will be authorized
@@ -25,7 +28,7 @@ contract ProxyPermission {
     /// @param _contractAddr Auth address which will be removed from authority list
     function removePermission(address _contractAddr) public {
         address currAuthority = address(DSAuth(address(this)).authority());
-        
+
         // if there is no authority, that means that contract doesn't have permission
         if (currAuthority == address(0)) {
             return;
@@ -35,7 +38,7 @@ contract ProxyPermission {
         guard.forbid(_contractAddr, address(this), bytes4(keccak256("execute(address,bytes)")));
     }
 
-    function proxyOwner() internal returns(address) {
+    function proxyOwner() internal view returns (address) {
         return DSAuth(address(this)).owner();
-    } 
+    }
 }

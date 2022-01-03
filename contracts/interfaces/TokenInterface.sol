@@ -1,7 +1,7 @@
 pragma solidity ^0.6.0;
 
 abstract contract TokenInterface {
-	address public constant WETH_ADDRESS = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
+	address public constant WAVAX_ADDRESS = 0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7;
     
     function allowance(address, address) public virtual returns (uint256);
 

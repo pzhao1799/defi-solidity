@@ -1,5 +1,6 @@
-pragma solidity ^0.6.0;
+// SPDX-License-Identifier: MIT
 
+pragma solidity =0.7.6;
 
 contract Discount {
     address public owner;
@@ -12,7 +13,7 @@ contract Discount {
         uint256 amount;
     }
 
-    constructor() public {
+    constructor() {
         owner = msg.sender;
     }
 
@@ -26,7 +27,7 @@ contract Discount {
 
     function setServiceFee(address _user, uint256 _fee) public {
         require(msg.sender == owner, "Only owner");
-        require(_fee >= MAX_SERVICE_FEE || _fee == 0);
+        require(_fee >= MAX_SERVICE_FEE || _fee == 0, "Wrong fee value");
 
         serviceFees[_user] = CustomServiceFee({active: true, amount: _fee});
     }
