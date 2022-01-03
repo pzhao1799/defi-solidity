@@ -1,3 +1,5 @@
+pragma solidity ^0.6.0;
+
 contract APExchangeData {
 
     // first is empty to keep the legacy order in place

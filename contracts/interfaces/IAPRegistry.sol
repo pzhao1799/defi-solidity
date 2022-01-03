@@ -2,7 +2,7 @@
 
 pragma solidity =0.7.6;
 
-abstract contract IDFSRegistry {
+abstract contract IAPRegistry {
  
     function getAddr(bytes32 _id) public view virtual returns (address);
 
