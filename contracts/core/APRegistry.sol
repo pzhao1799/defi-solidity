@@ -69,13 +69,6 @@ contract APRegistry is AdminAuth, CoreHelper {
 
         // Remember tha address so we can revert back to old addr if needed
         previousAddresses[_id] = _contractAddr;
-
-        logger.Log(
-            address(this),
-            msg.sender,
-            "AddNewContract",
-            abi.encode(_id, _contractAddr, _waitPeriod)
-        );
     }
 
     /// @notice Reverts to the previous address immediately
@@ -87,13 +80,6 @@ contract APRegistry is AdminAuth, CoreHelper {
 
         address currentAddr = entries[_id].contractAddr;
         entries[_id].contractAddr = previousAddresses[_id];
-
-        logger.Log(
-            address(this),
-            msg.sender,
-            "RevertToPreviousAddress",
-            abi.encode(_id, currentAddr, previousAddresses[_id])
-        );
     }
 
     /// @notice Starts an address change for an existing entry
@@ -108,13 +94,6 @@ contract APRegistry is AdminAuth, CoreHelper {
         entries[_id].inContractChange = true;
 
         pendingAddresses[_id] = _newContractAddr;
-
-        logger.Log(
-            address(this),
-            msg.sender,
-            "StartContractChange",
-            abi.encode(_id, entries[_id].contractAddr, _newContractAddr)
-        );
     }
 
     /// @notice Changes new contract address, correct time must have passed
@@ -134,13 +113,6 @@ contract APRegistry is AdminAuth, CoreHelper {
 
         pendingAddresses[_id] = address(0);
         previousAddresses[_id] = oldContractAddr;
-
-        logger.Log(
-            address(this),
-            msg.sender,
-            "ApproveContractChange",
-            abi.encode(_id, oldContractAddr, entries[_id].contractAddr)
-        );
     }
 
     /// @notice Cancel pending change
@@ -154,13 +126,6 @@ contract APRegistry is AdminAuth, CoreHelper {
         pendingAddresses[_id] = address(0);
         entries[_id].inContractChange = false;
         entries[_id].changeStartTime = 0;
-
-        logger.Log(
-            address(this),
-            msg.sender,
-            "CancelContractChange",
-            abi.encode(_id, oldContractAddr, entries[_id].contractAddr)
-        );
     }
 
     /// @notice Starts the change for waitPeriod
@@ -174,13 +139,6 @@ contract APRegistry is AdminAuth, CoreHelper {
 
         entries[_id].changeStartTime = block.timestamp; // solhint-disable-line
         entries[_id].inWaitPeriodChange = true;
-
-        logger.Log(
-            address(this),
-            msg.sender,
-            "StartWaitPeriodChange",
-            abi.encode(_id, _newWaitPeriod)
-        );
     }
 
     /// @notice Changes new wait period, correct time must have passed
@@ -200,13 +158,6 @@ contract APRegistry is AdminAuth, CoreHelper {
         entries[_id].changeStartTime = 0;
 
         pendingWaitTimes[_id] = 0;
-
-        logger.Log(
-            address(this),
-            msg.sender,
-            "ApproveWaitPeriodChange",
-            abi.encode(_id, oldWaitTime, entries[_id].waitPeriod)
-        );
     }
 
     /// @notice Cancel wait period change
@@ -220,12 +171,5 @@ contract APRegistry is AdminAuth, CoreHelper {
         pendingWaitTimes[_id] = 0;
         entries[_id].inWaitPeriodChange = false;
         entries[_id].changeStartTime = 0;
-
-        logger.Log(
-            address(this),
-            msg.sender,
-            "CancelWaitPeriodChange",
-            abi.encode(_id, oldWaitPeriod, entries[_id].waitPeriod)
-        );
     }
 }

@@ -51,9 +51,6 @@ contract Subscriptions is StrategyData, AdminAuth, CoreHelper {
         usersPos[msg.sender].push(strategies.length - 1);
 
         updateCounter++;
-
-        logger.Log(address(this), msg.sender, "CreateStrategy", abi.encode(strategies.length - 1));
-
         return strategies.length - 1;
     }
 
@@ -80,9 +77,6 @@ contract Subscriptions is StrategyData, AdminAuth, CoreHelper {
         );
 
         updateCounter++;
-
-        logger.Log(address(this), msg.sender, "CreateTemplate", abi.encode(templates.length - 1));
-
         return templates.length - 1;
     }
 
@@ -112,7 +106,6 @@ contract Subscriptions is StrategyData, AdminAuth, CoreHelper {
 
         updateCounter++;
 
-        logger.Log(address(this), msg.sender, "UpdateStrategy", abi.encode(_strategyId));
     }
 
     /// @notice Unsubscribe an existing strategy
@@ -130,7 +123,6 @@ contract Subscriptions is StrategyData, AdminAuth, CoreHelper {
         strategies[_subId] = strategies[lastSub]; // last strategy put in place of the deleted one
         strategies.pop(); // delete last strategy, because it moved
 
-        logger.Log(address(this), msg.sender, "Unsubscribe", abi.encode(_subId));
     }
 
     function _removeUserPos(address _user, uint _index) internal {

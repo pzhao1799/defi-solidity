@@ -20,6 +20,7 @@ contract APExchangeHelper {
         address payable _to
     ) internal {
         // clean out any avax leftover
+        // TODO Avax Burn Address not in token utils
         TokenUtils.AVAX_BURN_ADDRESS.withdrawTokens(_to, type(uint256).max);
 
         _srcAddr.withdrawTokens(_to, type(uint256).max);

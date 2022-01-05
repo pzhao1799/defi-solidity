@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 pragma solidity =0.7.6;
+pragma abicoder v2;
 
 contract APExchangeData {
 
@@ -24,7 +25,7 @@ contract APExchangeData {
         uint256 srcAmount;
         uint256 destAmount;
         uint256 minPrice;
-        uint256 dfsFeeDivider; // service fee divider
+        uint256 apFeeDivider; // service fee divider
         address user; // user to check special fee
         address wrapper;
         bytes wrapperData;

@@ -10,6 +10,9 @@ library TokenUtils {
 
     address public constant WAVAX_ADDR = 0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7;
     address public constant AVAX_ADDR = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
+    // TODO added burn address
+    address internal constant AVAX_BURN_ADDRESS = 0x000000000000000000000000000000000000dEaD;
+
 
     function approveToken(
         address _tokenAddr,

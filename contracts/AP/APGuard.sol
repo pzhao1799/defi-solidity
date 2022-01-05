@@ -14,3 +14,7 @@ abstract contract APGuard {
 
     function forbid(address src, address dst, bytes32 sig) public virtual;
 }
+
+abstract contract APGuardFactory {
+    function newGuard() public virtual returns (APGuard guard);
+}

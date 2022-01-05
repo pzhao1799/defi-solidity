@@ -2,7 +2,6 @@
 
 pragma solidity =0.7.6;
 
-
 contract APNote {
     event LogNote(
         bytes4 indexed sig,

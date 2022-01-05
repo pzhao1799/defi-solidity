@@ -9,7 +9,7 @@ import "./APNote.sol";
 abstract contract APProxy is APAuth, APNote {
     APProxyCache public cache; // global cache for contracts
 
-    constructor(address _cacheAddr) public {
+    constructor(address _cacheAddr) {
         require(setCache(_cacheAddr));
     }
 

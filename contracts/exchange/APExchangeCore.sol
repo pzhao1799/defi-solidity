@@ -42,8 +42,8 @@ contract APExchangeCore is APExchangeHelper, APMath, APExchangeData, ExchangeHel
             ));
         }
 
-        onChainSwap(exData, ExchangeActionType.SELL);
-        wrapper = exData.wrapper;
+        onChainSwap(exData, ActionType.SELL);
+        address wrapper = exData.wrapper;
 
         uint256 destBalanceAfter = exData.destAddr.getBalance(address(this));
         uint256 amountBought = sub(destBalanceAfter, destBalanceBefore);
@@ -78,8 +78,8 @@ contract APExchangeCore is APExchangeHelper, APMath, APExchangeData, ExchangeHel
             ));
         }
 
-        onChainSwap(exData, ExchangeActionType.BUY);
-        wrapper = exData.wrapper;
+        onChainSwap(exData, ActionType.BUY);
+        address wrapper = exData.wrapper;
 
         uint256 destBalanceAfter = exData.destAddr.getBalance(address(this));
         uint256 amountBought = sub(destBalanceAfter, destBalanceBefore);
@@ -97,7 +97,7 @@ contract APExchangeCore is APExchangeHelper, APMath, APExchangeData, ExchangeHel
     /// @param _exData Exchange data struct
     /// @param _type Type of action SELL|BUY
     /// @return swappedTokens For Sell that the destAmount, for Buy thats the srcAmount
-    function onChainSwap(ExchangeData memory _exData, ExchangeActionType _type)
+    function onChainSwap(ExchangeData memory _exData, ActionType _type)
         internal
         returns (uint256 swappedTokens)
     {
@@ -108,7 +108,7 @@ contract APExchangeCore is APExchangeHelper, APMath, APExchangeData, ExchangeHel
 
         IERC20(_exData.srcAddr).safeTransfer(_exData.wrapper, _exData.srcAmount);
 
-        if (_type == ExchangeActionType.SELL) {
+        if (_type == ActionType.SELL) {
             swappedTokens = IExchangeV3(_exData.wrapper).sell(
                 _exData.srcAddr,
                 _exData.destAddr,

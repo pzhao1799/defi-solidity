@@ -2,9 +2,9 @@
 
 pragma solidity =0.7.6;
 
-import "./ERC20.sol";
+import "./IERC20.sol";
 
-abstract contract GasTokenInterface is ERC20 {
+abstract contract GasTokenInterface is IERC20 {
     function free(uint256 value) public virtual returns (bool success);
 
     function freeUpTo(uint256 value) public virtual returns (uint256 freed);

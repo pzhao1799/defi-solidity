@@ -3,6 +3,7 @@
 pragma solidity =0.7.6;
 
 contract MainnetActionsUtilAddresses {
-    address internal constant DFS_REG_CONTROLLER_ADDR = 0;
-    address internal constant REGISTRY_ADDR = 0;
+    //TODO
+    address internal constant DFS_REG_CONTROLLER_ADDR = 0x000000000000000000000000000000000000EEED;
+    address internal constant REGISTRY_ADDR = 0x000000000000000000000000000000000000EEED;
 }
