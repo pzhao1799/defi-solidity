@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.6.0;
+// SPDX-License-Identifier: MIT
+
+pragma solidity =0.7.6;
 
 abstract contract IFeeRecipient {
     function getFeeAddr() public view virtual returns (address);
