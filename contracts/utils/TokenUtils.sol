@@ -9,8 +9,6 @@ library TokenUtils {
     using SafeERC20 for IERC20;
 
     address public constant WAVAX_ADDR = 0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7;
-    address public constant AVAX_ADDR = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
-    // TODO added burn address
     address internal constant AVAX_BURN_ADDRESS = 0x000000000000000000000000000000000000dEaD;
 
 
@@ -19,7 +17,7 @@ library TokenUtils {
         address _to,
         uint256 _amount
     ) internal {
-        if (_tokenAddr == AVAX_ADDR) return;
+        if (_tokenAddr == AVAX_BURN_ADDRESS) return;
 
         if (IERC20(_tokenAddr).allowance(address(this), _to) < _amount) {
             IERC20(_tokenAddr).safeApprove(_to, _amount);
@@ -36,7 +34,7 @@ library TokenUtils {
             _amount = getBalance(_token, _from);
         }
 
-        if (_from != address(0) && _from != address(this) && _token != AVAX_ADDR && _amount != 0) {
+        if (_from != address(0) && _from != address(this) && _token != AVAX_BURN_ADDRESS && _amount != 0) {
             IERC20(_token).safeTransferFrom(_from, address(this), _amount);
         }
 
@@ -53,7 +51,7 @@ library TokenUtils {
         }
 
         if (_to != address(0) && _to != address(this) && _amount != 0) {
-            if (_token != AVAX_ADDR) {
+            if (_token != AVAX_BURN_ADDRESS) {
                 IERC20(_token).safeTransfer(_to, _amount);
             } else {
                 payable(_to).transfer(_amount);
@@ -72,7 +70,7 @@ library TokenUtils {
     }
 
     function getBalance(address _tokenAddr, address _acc) internal view returns (uint256) {
-        if (_tokenAddr == AVAX_ADDR) {
+        if (_tokenAddr == AVAX_BURN_ADDRESS) {
             return _acc.balance;
         } else {
             return IERC20(_tokenAddr).balanceOf(_acc);
@@ -80,7 +78,7 @@ library TokenUtils {
     }
 
     function getTokenDecimals(address _token) internal view returns (uint256) {
-        if (_token == AVAX_ADDR) return 18;
+        if (_token == AVAX_BURN_ADDRESS) return 18;
 
         return IERC20(_token).decimals();
     }
