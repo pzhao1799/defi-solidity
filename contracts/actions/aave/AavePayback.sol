@@ -62,7 +62,7 @@ contract AavePayback is ActionBase, AaveHelper {
     //////////////////////////// ACTION LOGIC ////////////////////////////
 
     /// @notice User paybacks tokens to the Aave protocol
-    /// @dev User needs to approve the DSProxy to pull the _tokenAddr tokens
+    /// @dev User needs to approve the APProxy to pull the _tokenAddr tokens
     /// @param _market Address provider for specific market
     /// @param _tokenAddr The address of the token to be payed back
     /// @param _amount Amount of tokens to be payed back

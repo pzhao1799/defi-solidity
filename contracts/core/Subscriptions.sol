@@ -4,7 +4,7 @@ pragma solidity =0.7.6;
 pragma experimental ABIEncoderV2;
 
 import "../auth/AdminAuth.sol";
-import "../interfaces/IDSProxy.sol";
+import "../interfaces/IAPProxy.sol";
 import "./StrategyData.sol";
 import "./helpers/CoreHelper.sol";
 

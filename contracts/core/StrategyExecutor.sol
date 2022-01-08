@@ -5,7 +5,7 @@ pragma experimental ABIEncoderV2;
 
 import "../auth/AdminAuth.sol";
 import "../interfaces/ITrigger.sol";
-import "../interfaces/IDSProxy.sol";
+import "../interfaces/IAPProxy.sol";
 import "./StrategyData.sol";
 import "./Subscriptions.sol";
 import "./BotAuth.sol";

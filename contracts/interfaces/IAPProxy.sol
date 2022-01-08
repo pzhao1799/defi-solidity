@@ -2,7 +2,7 @@
 
 pragma solidity =0.7.6;
 
-abstract contract IDSProxy {
+abstract contract IAPProxy {
 
     function execute(address _target, bytes memory _data) public payable virtual returns (bytes32);
 

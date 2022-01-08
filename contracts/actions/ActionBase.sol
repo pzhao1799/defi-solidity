@@ -34,7 +34,7 @@ abstract contract ActionBase is AdminAuth, ActionsUtilHelper {
     /// @param _subData Array of subscribed vales, replaces input values if specified
     /// @param _paramMapping Array that specifies how return and subscribed values are mapped in input
     /// @param _returnValues Returns values from actions before, which can be injected in inputs
-    /// @return Returns a bytes32 value through DSProxy, each actions implements what that value is
+    /// @return Returns a bytes32 value through APProxy, each actions implements what that value is
     function executeAction(
         bytes[] memory _callData,
         bytes[] memory _subData,

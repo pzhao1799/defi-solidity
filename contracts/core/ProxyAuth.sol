@@ -3,11 +3,11 @@
 pragma solidity =0.7.6;
 
 import "../interfaces/IAPRegistry.sol";
-import "../interfaces/IDSProxy.sol";
+import "../interfaces/IAPProxy.sol";
 import "../auth/AdminAuth.sol";
 import "./helpers/CoreHelper.sol";
 
-/// @title ProxyAuth Gets DSProxy auth from users and is callable by the Executor
+/// @title ProxyAuth Gets APProxy auth from users and is callable by the Executor
 contract ProxyAuth is AdminAuth, CoreHelper {
 
     IAPRegistry public constant registry = IAPRegistry(REGISTRY_ADDR);
@@ -21,9 +21,9 @@ contract ProxyAuth is AdminAuth, CoreHelper {
         _;
     }
 
-    /// @notice Calls the .execute() method of the specified users DSProxy
+    /// @notice Calls the .execute() method of the specified users APProxy
     /// @dev Contract gets the authority from the user to call it, only callable by Executor
-    /// @param _proxyAddr Address of the users DSProxy
+    /// @param _proxyAddr Address of the users APProxy
     /// @param _contractAddr Address of the contract which to execute
     /// @param _data Call data of the function to be called
     function callExecute(
@@ -32,7 +32,7 @@ contract ProxyAuth is AdminAuth, CoreHelper {
         bytes memory _data
     ) public payable onlyExecutor {
 
-        IDSProxy(_proxyAddr).execute{value: msg.value}(_contractAddr, _data);
+        IAPProxy(_proxyAddr).execute{value: msg.value}(_contractAddr, _data);
 
         // return if anything left
         if (address(this).balance > 0) {
