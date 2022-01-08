@@ -25,8 +25,8 @@ module.exports = {
   },
   etherscan: {
     apiKey: {
-      avalanche: "YOUR_SNOWTRACE_API_KEY",
-      avalancheFujiTestnet: "YOUR_SNOWTRACE_API_KEY",
+      avalanche: "TUQPXNWFDRXQSUATTTQ629HF4B1WDM6U5A",
+      avalancheFujiTestnet: "TUQPXNWFDRXQSUATTTQ629HF4B1WDM6U5A",
     }
   }
 };
