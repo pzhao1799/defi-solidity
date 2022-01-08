@@ -3,7 +3,7 @@
 pragma solidity =0.7.6;
 pragma experimental ABIEncoderV2;
 
-import "../../interfaces/IWETH.sol";
+import "../../interfaces/IWAVAX.sol";
 import "../../utils/TokenUtils.sol";
 import "../ActionBase.sol";
 import "./helpers/AaveHelper.sol";
@@ -56,7 +56,7 @@ contract AaveWithdraw is ActionBase, AaveHelper {
         uint256 _amount,
         address _to
     ) internal returns (uint256) {
-        ILendingPoolV2 lendingPool = getLendingPool(_market);
+        ILendingPool lendingPool = getLendingPool(_market);
         uint256 tokenBefore;
 
         // only need to remember this is _amount is max, no need to waste gas otherwise
@@ -71,13 +71,6 @@ contract AaveWithdraw is ActionBase, AaveHelper {
         if (_amount == type(uint256).max) {
             _amount = _tokenAddr.getBalance(_to) - tokenBefore;
         }
-
-        logger.Log(
-            address(this),
-            msg.sender,
-            "AaveWithdraw",
-            abi.encode(_market, _tokenAddr, _amount, _to)
-        );
 
         return _amount;
     }

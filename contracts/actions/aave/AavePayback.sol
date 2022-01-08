@@ -3,7 +3,7 @@
 pragma solidity =0.7.6;
 pragma experimental ABIEncoderV2;
 
-import "../../interfaces/IWETH.sol";
+import "../../interfaces/IWAVAX.sol";
 import "../../utils/TokenUtils.sol";
 import "../ActionBase.sol";
 import "./helpers/AaveHelper.sol";
@@ -82,7 +82,7 @@ contract AavePayback is ActionBase, AaveHelper {
             _onBehalf = address(this);
         }
 
-        ILendingPoolV2 lendingPool = getLendingPool(_market);
+        ILendingPool lendingPool = getLendingPool(_market);
         uint256 maxDebt = getWholeDebt(_market, _tokenAddr, _rateMode, _onBehalf);
         _amount = _amount > maxDebt ? maxDebt : _amount;
 
@@ -97,13 +97,6 @@ contract AavePayback is ActionBase, AaveHelper {
 
         // send back any leftover tokens that weren't used in the repay
         _tokenAddr.withdrawTokens(_from, tokensAfter);
-
-        logger.Log(
-            address(this),
-            msg.sender,
-            "AavePayback",
-            abi.encode(_market, _tokenAddr, _amount, _rateMode, _from, _onBehalf)
-        );
 
         return (tokensBefore - tokensAfter);
     }
@@ -129,7 +122,7 @@ contract AavePayback is ActionBase, AaveHelper {
     }
 
     function getWholeDebt(address _market, address _tokenAddr, uint _borrowType, address _debtOwner) internal view returns (uint256) {
-        IAaveProtocolDataProviderV2 dataProvider = getDataProvider(_market);
+        IAaveProtocolDataProvider dataProvider = getDataProvider(_market);
         (, uint256 borrowsStable, uint256 borrowsVariable, , , , , , ) =
             dataProvider.getUserReserveData(_tokenAddr, _debtOwner);
 

@@ -75,7 +75,7 @@ contract AaveSupply is ActionBase, AaveHelper {
         address _onBehalf,
         bool _enableAsColl
     ) internal returns (uint256) {
-        ILendingPoolV2 lendingPool = getLendingPool(_market);
+        ILendingPool lendingPool = getLendingPool(_market);
 
         // if amount is set to max, take the whole _from balance
         if (_amount == type(uint256).max) {
@@ -99,13 +99,6 @@ contract AaveSupply is ActionBase, AaveHelper {
         if (_enableAsColl) {
             enableAsCollateral(_market, _tokenAddr, true);
         }
-
-        logger.Log(
-            address(this),
-            msg.sender,
-            "AaveSupply",
-            abi.encode(_market, _tokenAddr, _amount, _from, _onBehalf, _enableAsColl)
-        );
 
         return _amount;
     }

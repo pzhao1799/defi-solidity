@@ -55,15 +55,6 @@ contract AaveClaimStkAave is ActionBase, AaveHelper {
             _params.to
         );
 
-        logger.Log(
-            address(this),
-            msg.sender,
-            "AaveClaimStkAave",
-            abi.encode(
-                _params,
-                claimedAmount
-            )
-        );
     }
 
     function parseInputs(bytes[] memory _callData) internal pure returns (Params memory params)

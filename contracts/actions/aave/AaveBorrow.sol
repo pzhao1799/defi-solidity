@@ -75,7 +75,7 @@ contract AaveBorrow is ActionBase, AaveHelper {
         address _to,
         address _onBehalf
     ) internal returns (uint256) {
-        ILendingPoolV2 lendingPool = getLendingPool(_market);
+        ILendingPool lendingPool = getLendingPool(_market);
 
         // defaults to onBehalf of proxy
         if (_onBehalf == address(0)) {
@@ -85,13 +85,6 @@ contract AaveBorrow is ActionBase, AaveHelper {
         lendingPool.borrow(_tokenAddr, _amount, _rateMode, AAVE_REFERRAL_CODE, _onBehalf);
 
         _amount = _tokenAddr.withdrawTokens(_to, _amount);
-
-        logger.Log(
-            address(this),
-            msg.sender,
-            "AaveBorrow",
-            abi.encode(_market, _tokenAddr, _amount, _rateMode, _to, _onBehalf)
-        );
 
         return _amount;
     }
