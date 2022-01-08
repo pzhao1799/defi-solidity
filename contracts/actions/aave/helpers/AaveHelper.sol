@@ -6,7 +6,6 @@ import "../../../interfaces/aave/ILendingPool.sol";
 import "../../../interfaces/aave/IAaveProtocolDataProvider.sol";
 import "../../../interfaces/aave/IAaveIncentivesController.sol";
 import "./MainnetAaveAddresses.sol";
-import "../../../interfaces/aave/IStakedToken.sol";
 
 /// @title Utility functions and data used in Aave actions
 contract AaveHelper is MainnetAaveAddresses {
@@ -19,8 +18,6 @@ contract AaveHelper is MainnetAaveAddresses {
         0x0100000000000000000000000000000000000000000000000000000000000000;
     
     IAaveIncentivesController constant public AaveIncentivesController = IAaveIncentivesController(STAKED_CONTROLLER_ADDR);
-
-    IStakedToken constant public StakedToken = IStakedToken(STAKED_TOKEN_ADDR);
 
     /// @notice Enable/Disable a token as collateral for the specified Aave market
     function enableAsCollateral(
