@@ -2,6 +2,7 @@ require("dotenv").config();
 
 require("@nomiclabs/hardhat-etherscan");
 require("@nomiclabs/hardhat-waffle");
+let secrets = require("./secrets");
 // require("hardhat-gas-reporter");
 // require("solidity-coverage");
 
@@ -15,5 +16,14 @@ require("@nomiclabs/hardhat-waffle");
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.7.6"
+  solidity: "0.7.6",
+  networks: {
+    local: {
+      url: secrets.url,
+      accounts:[secrets.key] 
+    }
+  },
+  etherscan: {
+    apiKey: ""
+  }
 };
