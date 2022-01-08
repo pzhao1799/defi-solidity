@@ -20,27 +20,27 @@ contract APExchangeCore is APExchangeHelper, APMath, APExchangeData, ExchangeHel
     string public constant ERR_SLIPPAGE_HIT = "Slippage hit";
     string public constant ERR_DEST_AMOUNT_MISSING = "Dest amount missing";
     string public constant ERR_WRAPPER_INVALID = "Wrapper invalid";
-    FeeRecipient public constant feeRecipient =
-        FeeRecipient(FEE_RECIPIENT_ADDRESS);
+    // FeeRecipient public constant feeRecipient =
+    //     FeeRecipient(FEE_RECIPIENT_ADDRESS);
 
     /// @notice Internal method that preforms a sell on 0x/on-chain
     /// @dev Useful for other AP contract to integrate for exchanging
     /// @param exData Exchange data struct
     /// @return (address, uint) Address of the wrapper used and destAmount
     function _sell(ExchangeData memory exData) internal returns (address, uint256) {
-        uint256 amountWithoutFee = exData.srcAmount;
+        // uint256 amountWithoutFee = exData.srcAmount;
 
         uint256 destBalanceBefore = exData.destAddr.getBalance(address(this));
 
         // Takes AP exchange fee
-        if (exData.apFeeDivider != 0) {
-            exData.srcAmount = sub(exData.srcAmount, getFee(
-                exData.srcAmount,
-                exData.user,
-                exData.srcAddr,
-                exData.apFeeDivider
-            ));
-        }
+        // if (exData.apFeeDivider != 0) {
+        //     exData.srcAmount = sub(exData.srcAmount, getFee(
+        //         exData.srcAmount,
+        //         exData.user,
+        //         exData.srcAddr,
+        //         exData.apFeeDivider
+        //     ));
+        // }
 
         onChainSwap(exData, ActionType.SELL);
         address wrapper = exData.wrapper;
@@ -52,7 +52,7 @@ contract APExchangeCore is APExchangeHelper, APMath, APExchangeData, ExchangeHel
         require(amountBought >= wmul(exData.minPrice, exData.srcAmount), ERR_SLIPPAGE_HIT);
 
         // revert back exData changes to keep it consistent
-        exData.srcAmount = amountWithoutFee;
+        // exData.srcAmount = amountWithoutFee;
 
         return (wrapper, amountBought);
     }
@@ -69,14 +69,14 @@ contract APExchangeCore is APExchangeHelper, APMath, APExchangeData, ExchangeHel
         uint256 destBalanceBefore = exData.destAddr.getBalance(address(this));
 
         // Takes AP exchange fee
-        if (exData.apFeeDivider != 0) {
-            exData.srcAmount = sub(exData.srcAmount, getFee(
-                exData.srcAmount,
-                exData.user,
-                exData.srcAddr,
-                exData.apFeeDivider
-            ));
-        }
+        // if (exData.apFeeDivider != 0) {
+        //     exData.srcAmount = sub(exData.srcAmount, getFee(
+        //         exData.srcAmount,
+        //         exData.user,
+        //         exData.srcAddr,
+        //         exData.apFeeDivider
+        //     ));
+        // }
 
         onChainSwap(exData, ActionType.BUY);
         address wrapper = exData.wrapper;
@@ -131,30 +131,30 @@ contract APExchangeCore is APExchangeHelper, APMath, APExchangeData, ExchangeHel
     /// @param _token Address of the token
     /// @param _apFeeDivider AP fee divider
     /// @return feeAmount Amount in Dai owner earned on the fee
-    function getFee(
-        uint256 _amount,
-        address _user,
-        address _token,
-        uint256 _apFeeDivider
-    ) internal returns (uint256 feeAmount) {
-        if (_apFeeDivider != 0 && Discount(DISCOUNT_ADDRESS).isCustomFeeSet(_user)) {
-            _apFeeDivider = Discount(DISCOUNT_ADDRESS).getCustomServiceFee(_user);
-        }
+    // function getFee(
+    //     uint256 _amount,
+    //     address _user,
+    //     address _token,
+    //     uint256 _apFeeDivider
+    // ) internal returns (uint256 feeAmount) {
+    //     if (_apFeeDivider != 0 && Discount(DISCOUNT_ADDRESS).isCustomFeeSet(_user)) {
+    //         _apFeeDivider = Discount(DISCOUNT_ADDRESS).getCustomServiceFee(_user);
+    //     }
 
-        if (_apFeeDivider == 0) {
-            feeAmount = 0;
-        } else {
-            feeAmount = _amount / _apFeeDivider;
+    //     if (_apFeeDivider == 0) {
+    //         feeAmount = 0;
+    //     } else {
+    //         feeAmount = _amount / _apFeeDivider;
 
-            // fee can't go over 10% of the whole amount
-            if (feeAmount > (_amount / 10)) {
-                feeAmount = _amount / 10;
-            }
+    //         // fee can't go over 10% of the whole amount
+    //         if (feeAmount > (_amount / 10)) {
+    //             feeAmount = _amount / 10;
+    //         }
 
-            address walletAddr = feeRecipient.getFeeAddr();
+    //         address walletAddr = feeRecipient.getFeeAddr();
 
-            _token.withdrawTokens(walletAddr, feeAmount);
-        }
-    }
+    //         _token.withdrawTokens(walletAddr, feeAmount);
+    //     }
+    // }
 
 }
