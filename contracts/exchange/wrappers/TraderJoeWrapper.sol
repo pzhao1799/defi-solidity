@@ -84,7 +84,7 @@ contract TraderJoeWrapper is APMath, IExchangeV3, AdminAuth, WrapperHelper {
     function sendLeftOver(address _srcAddr) internal {
         msg.sender.transfer(address(this).balance);
 
-        if (_srcAddr != AVAX_ADDRESS) {
+        if (_srcAddr != AVAX_BURN_ADDRESS) {
             IERC20(_srcAddr).safeTransfer(msg.sender, IERC20(_srcAddr).balanceOf(address(this)));
         }
     }
