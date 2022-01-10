@@ -4,7 +4,7 @@
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
-const { deploy } = require("./utils.js");
+const { deploy } = require("./utils");
 
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
@@ -14,16 +14,6 @@ async function main() {
 
   await deploy('APRegistry');
   await deploy('ProxyAuth');
-  
-  await deploy('StrategyExecutor');
-  await deploy('SubscriptionProxy');
-  await deploy('Subscriptions');
-
-  // aave actions
-  await deploy('AaveSupply');
-  await deploy('AaveWithdraw');
-  await deploy('AaveBorrow');
-  await deploy('AavePayback');
 }
 
 // We recommend this pattern to be able to use async/await everywhere
