@@ -17,10 +17,10 @@ async function main() {
   await hre.run('compile');
 
   await deploy('APRegistry');
-  await deploy('BotAuth');
   await deploy('ProxyAuth');
-  await deploy('StrategyData');
+  
   await deploy('StrategyExecutor');
+  await deploy('SubscriptionProxy');
   await deploy('Subscriptions');
 
   // aave actions
