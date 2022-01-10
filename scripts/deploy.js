@@ -5,26 +5,34 @@
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
 
+async function deploy(contractName) {
+  const contract = await ethers.getContractFactory(contractName);
+  const contractInstance = await contract.deploy();
+  console.log(`${contractName} deployed to:`, contractInstance.address);
+}
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
-  // line interface.
-  //
-  // If this script is run directly using `node` you may want to call compile
-  // manually to make sure everything is compiled
-  // await hre.run('compile');
+  // line interface.A
+  const [deployer] = await ethers.getSigners();
+  await hre.run('compile');
 
-  // We get the contract to deploy
-  // const Greeter = await hre.ethers.getContractFactory("Greeter");
-  // const greeter = await Greeter.deploy("Hello, Hardhat!");
+  await deploy('APRegistry');
+  await deploy('BotAuth');
+  await deploy('ProxyAuth');
+  await deploy('StrategyData');
+  await deploy('StrategyExecutor');
+  await deploy('Subscriptions');
 
-  // await greeter.deployed();
-
-  // console.log("Greeter deployed to:", greeter.address);
+  // aave actions
+  await deploy('AaveSupply');
+  await deploy('AaveWithdraw');
+  await deploy('AaveBorrow');
+  await deploy('AavePayback');
 }
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
-// main().catch((error) => {
-//   console.error(error);
-//   process.exitCode = 1;
-// });
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
