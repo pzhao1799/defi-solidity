@@ -17,16 +17,16 @@ let secrets = require("./secrets");
  */
 module.exports = {
   solidity: "0.7.6",
-  // networks: {
-  //   local: {
-  //     url: secrets.url,
-  //     accounts:[secrets.key] 
-  //   }
-  // },
-  // etherscan: {
-  //   apiKey: {
-  //     avalanche: "TUQPXNWFDRXQSUATTTQ629HF4B1WDM6U5A",
-  //     avalancheFujiTestnet: "TUQPXNWFDRXQSUATTTQ629HF4B1WDM6U5A",
-  //   }
-  // }
+  networks: {
+    fuji: {
+      url: secrets.url,
+      accounts:[secrets.key] 
+    }
+  },
+  etherscan: {
+    apiKey: {
+      avalanche: "TUQPXNWFDRXQSUATTTQ629HF4B1WDM6U5A",
+      avalancheFujiTestnet: "TUQPXNWFDRXQSUATTTQ629HF4B1WDM6U5A",
+    }
+  }
 };
